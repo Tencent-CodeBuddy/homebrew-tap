@@ -1,0 +1,94 @@
+name: Create Versioned Formula
+
+on:
+  repository_dispatch:
+    types: [release-update]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to create formula for (format: X.Y.Z, or "latest" to fetch newest)'
+        required: false
+        type: string
+        default: 'latest'
+
+permissions:
+  contents: write
+
+jobs:
+  create-versioned-formula:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Resolve version
+        id: version
+        run: |
+          VERSION="${{ github.event.client_payload.version || github.event.inputs.version }}"
+          
+          if [ -z "$VERSION" ]; then
+            echo "Error: Version not provided"
+            exit 1
+          fi
+          
+          # If 'latest', fetch the actual version number
+          if [ "$VERSION" = "latest" ]; then
+            echo "→ Resolving latest version..."
+            VERSION=$(curl -fsSL "https://acc-1258344699.cos.ap-guangzhou.myqcloud.com/@tencent-ai/codebuddy-code/releases/latest" | xargs)
+          fi
+          
+          # Validate version format
+          if [[ ! $VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Error: Invalid version format: $VERSION"
+            exit 1
+          fi
+          
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "✓ Version: $VERSION"
+
+      - name: Check if formula already exists
+        id: check_exists
+        run: |
+          VERSION="${{ steps.version.outputs.VERSION }}"
+          if [ -f "Formula/codebuddy-code@${VERSION}.rb" ]; then
+            echo "EXISTS=true" >> $GITHUB_OUTPUT
+            echo "ℹ Formula for v${VERSION} already exists, skipping"
+          else
+            echo "EXISTS=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create versioned formula
+        if: steps.check_exists.outputs.EXISTS == 'false'
+        run: |
+          chmod +x ./scripts/release.sh
+          ./scripts/release.sh "${{ steps.version.outputs.VERSION }}"
+
+      - name: Commit and push
+        if: steps.check_exists.outputs.EXISTS == 'false'
+        run: |
+          VERSION="${{ steps.version.outputs.VERSION }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Formula/
+          git commit -m "chore: add versioned formula for v${VERSION}"
+          git push origin main
+
+      - name: Summary
+        run: |
+          VERSION="${{ steps.version.outputs.VERSION }}"
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          ## Versioned Formula Created
+          
+          **Version:** ${VERSION}
+          
+          ### Install Commands
+          \`\`\`bash
+          # Latest version (dynamic)
+          brew install codebuddy-code
+          
+          # Specific version
+          brew install codebuddy-code@${VERSION}
+          \`\`\`
+          EOF
