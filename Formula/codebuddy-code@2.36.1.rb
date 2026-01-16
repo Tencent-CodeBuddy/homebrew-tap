@@ -1,4 +1,4 @@
-class CodebuddyCode < Formula
+class CodebuddyCodeAT2361 < Formula
   desc "AI-powered coding assistant for terminal, IDE, and GitHub"
   homepage "https://cnb.cool/codebuddy/codebuddy-code"
   license "MIT"
