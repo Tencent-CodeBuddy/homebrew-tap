@@ -2,34 +2,34 @@ class CodebuddyCode < Formula
   desc "AI-powered coding assistant for terminal, IDE, and GitHub"
   homepage "https://cnb.cool/codebuddy/codebuddy-code"
   license "MIT"
-  version "2.167.0"
+  version "2.168.2"
 
   base_url = "https://acc-1258344699.cos.ap-guangzhou.myqcloud.com/@tencent-ai/codebuddy-code/releases/download/#{version}"
 
   if OS.mac?
     if Hardware::CPU.arm?
       url "#{base_url}/codebuddy-code_Darwin_arm64.tar.gz"
-      sha256 "ef5134a41eba820807f65c8a81db099c16535d81fbbde3d9e6ce201447f2a2c4"
+      sha256 "6fbc8e309326e432fd40a97bf8f90a00abcd1d064a410785b87e251e7442e113"
     else
       url "#{base_url}/codebuddy-code_Darwin_x86_64.tar.gz"
-      sha256 "24b70c4dbfb3ca025aa3c6003cc39bbc13cf33f2f4997fde6db733b3397cea60"
+      sha256 "0554eea009392445722186bda2251643658668fe87d3de80db274d7e77d233e2"
     end
   elsif OS.linux?
     if Hardware::CPU.arm?
       if File.exist?("/lib/libc.musl-aarch64.so.1") || `ldd /bin/ls 2>&1`.include?("musl")
         url "#{base_url}/codebuddy-code_Linux_arm64_musl.tar.gz"
-        sha256 "483fa7b8ba3a5e8d6c8417eeaa7567a5484019df2dbe43247484155f6e31e643"
+        sha256 "8fa669cfaa7bb33f727c00cd2285329f626f3d994e4efab55e183123fe09b740"
       else
         url "#{base_url}/codebuddy-code_Linux_arm64.tar.gz"
-        sha256 "b3f27523b5492f8470b484f010847a60482a2772e2b2b6bd3a35770f709bd8fa"
+        sha256 "83c7ee74b9f30550d105bffe832734354ac19b0bf9a910233db932970cdda80b"
       end
     else
       if File.exist?("/lib/libc.musl-x86_64.so.1") || `ldd /bin/ls 2>&1`.include?("musl")
         url "#{base_url}/codebuddy-code_Linux_x86_64_musl.tar.gz"
-        sha256 "b95e34e057831f29551ec8980a4aabf5618447171f87ffcf3a2299113d199d49"
+        sha256 "fd92a142ca854e5b2d691ea1c578e50016e53b138fba8f923ac16169c1975f1e"
       else
         url "#{base_url}/codebuddy-code_Linux_x86_64.tar.gz"
-        sha256 "0b3d5c5360878759c4e5bafc33c0db3a3feb0b4df70507726c1ea69dc72a34c0"
+        sha256 "b7c4726bc249dd2b60e46c6aa2cde81c131c825f16e565d0e768c2769d87b9f9"
       end
     end
   end
