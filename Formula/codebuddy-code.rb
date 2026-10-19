@@ -2,34 +2,34 @@ class CodebuddyCode < Formula
   desc "AI-powered coding assistant for terminal, IDE, and GitHub"
   homepage "https://cnb.cool/codebuddy/codebuddy-code"
   license "MIT"
-  version "2.169.0"
+  version "2.170.0"
 
   base_url = "https://acc-1258344699.cos.ap-guangzhou.myqcloud.com/@tencent-ai/codebuddy-code/releases/download/#{version}"
 
   if OS.mac?
     if Hardware::CPU.arm?
       url "#{base_url}/codebuddy-code_Darwin_arm64.tar.gz"
-      sha256 "4ab67e20c3bab80f6c2a68c7d08518969b98c94e5b2fcf403b64787092b6db17"
+      sha256 "85fe75cee4c8d9b9f3baad06a2d12ffea76459899f6587712d06be498503782b"
     else
       url "#{base_url}/codebuddy-code_Darwin_x86_64.tar.gz"
-      sha256 "01d02dea0885e40f26a5db224452e45e36c11919ffc47e80bb69f0faccf3c7bb"
+      sha256 "9b79041eee65ccd2a5b4700d33eb5d75870a48be73b00a64a739c68938ba8149"
     end
   elsif OS.linux?
     if Hardware::CPU.arm?
       if File.exist?("/lib/libc.musl-aarch64.so.1") || `ldd /bin/ls 2>&1`.include?("musl")
         url "#{base_url}/codebuddy-code_Linux_arm64_musl.tar.gz"
-        sha256 "ebce1a0dcd985943e5581e444476342794eba13049528238a6f35e147d05c03d"
+        sha256 "ac71e4af0f03305c47f33f93ead10e4323e6fdbc72cd7f00aebd1c0a50e25e5d"
       else
         url "#{base_url}/codebuddy-code_Linux_arm64.tar.gz"
-        sha256 "22375abe39b995bc872c8aab5e532c6f0683140292686d4b5286a8328b95a9f0"
+        sha256 "763282a2d298b6c0e6e238151a194edfec58b5f57fe2e8ef9dc2949b577729ad"
       end
     else
       if File.exist?("/lib/libc.musl-x86_64.so.1") || `ldd /bin/ls 2>&1`.include?("musl")
         url "#{base_url}/codebuddy-code_Linux_x86_64_musl.tar.gz"
-        sha256 "62171b3a25315bf75d3dd05120c9e77f96637e0017fbdff539d3e7c727062af3"
+        sha256 "4c11cf4096cfb76438c3bbb089e8a513b982722b1ed848ab07b4dbca2d62eb6d"
       else
         url "#{base_url}/codebuddy-code_Linux_x86_64.tar.gz"
-        sha256 "42f0b097f74b0b3fa1bab310f37e7ef82b2bb7575d5d1d80a9fe22abfc25011f"
+        sha256 "6f3fb41ef0452c5a1c7c090f092f3a691071e58146634e266e85210234f027e1"
       end
     end
   end
