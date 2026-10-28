@@ -2,34 +2,34 @@ class CodebuddyCode < Formula
   desc "AI-powered coding assistant for terminal, IDE, and GitHub"
   homepage "https://cnb.cool/codebuddy/codebuddy-code"
   license "MIT"
-  version "2.177.1"
+  version "2.178.0"
 
   base_url = "https://acc-1258344699.cos.ap-guangzhou.myqcloud.com/@tencent-ai/codebuddy-code/releases/download/#{version}"
 
   if OS.mac?
     if Hardware::CPU.arm?
       url "#{base_url}/codebuddy-code_Darwin_arm64.tar.gz"
-      sha256 "ec8c95cd6d167299ecab035b0ee8ee76d811884ed9a624c91287a4bbe0295552"
+      sha256 "9eec4fe119826acf0bb112a21b7da2f5b0822705c4bfda04f33d16ec4001ee70"
     else
       url "#{base_url}/codebuddy-code_Darwin_x86_64.tar.gz"
-      sha256 "810c71e8f42c6cb6362c686cfc2ac53c36edde1e503748bffb6098712710bac3"
+      sha256 "23e7d7e0c7c15c40cc8adcc66aec8654e8f5c52afee1208c0d526127fa1e9349"
     end
   elsif OS.linux?
     if Hardware::CPU.arm?
       if File.exist?("/lib/libc.musl-aarch64.so.1") || `ldd /bin/ls 2>&1`.include?("musl")
         url "#{base_url}/codebuddy-code_Linux_arm64_musl.tar.gz"
-        sha256 "911e788025f2ba7ad329c25c0c9257020d7b643569cf5ffef251b4f6daa5b8f6"
+        sha256 "01a7fe3c27c6debe2cb323e530375a7c5035dad3ba66bee3c0c5ed47e9a20905"
       else
         url "#{base_url}/codebuddy-code_Linux_arm64.tar.gz"
-        sha256 "e13393ee09e58cd45b96bb81b203f5b011dde2d210c8088c2bc4dba60d647e98"
+        sha256 "01d7da026a174d7b09f66ae792393e18673e1944b34bb64886b002b4fed1cccb"
       end
     else
       if File.exist?("/lib/libc.musl-x86_64.so.1") || `ldd /bin/ls 2>&1`.include?("musl")
         url "#{base_url}/codebuddy-code_Linux_x86_64_musl.tar.gz"
-        sha256 "02c26abfdf9f498bf6f36032bc4bd07c0d03f6f422d9b9c83a9434ee674a11b1"
+        sha256 "5e707e1b8c4d29906a759c16c74d028a6fab414ec3496f27c6da886a114cd266"
       else
         url "#{base_url}/codebuddy-code_Linux_x86_64.tar.gz"
-        sha256 "cdae8e002ca27c4a93c1bd36dd52a79a01a48b0f5b07eb0d59f06f3ce25bfd07"
+        sha256 "40d19272c6ceb4b0a4aa068d30abad760463a4b2b62ca793ddef9cec15d33cd4"
       end
     end
   end
