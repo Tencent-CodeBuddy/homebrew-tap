@@ -2,34 +2,34 @@ class CodebuddyCode < Formula
   desc "AI-powered coding assistant for terminal, IDE, and GitHub"
   homepage "https://cnb.cool/codebuddy/codebuddy-code"
   license "MIT"
-  version "2.178.1"
+  version "2.179.0"
 
   base_url = "https://acc-1258344699.cos.ap-guangzhou.myqcloud.com/@tencent-ai/codebuddy-code/releases/download/#{version}"
 
   if OS.mac?
     if Hardware::CPU.arm?
       url "#{base_url}/codebuddy-code_Darwin_arm64.tar.gz"
-      sha256 "6a80279fc69582eaa8935d2985697c9d3d66a488e70a591cc4e4754158615a0d"
+      sha256 "6cd58ca50c2b7de6ee272616a8173cd4c87ee71dd79afb19d7eb22222f6c387f"
     else
       url "#{base_url}/codebuddy-code_Darwin_x86_64.tar.gz"
-      sha256 "586452745f3c5a9da8cdd090523bfd5824e5edfd92fdbd4c35ab513544642f3e"
+      sha256 "e88a75513a0c13ff1c57f01cc348c145be556927cf494cf85e6bffbec3fd5fe0"
     end
   elsif OS.linux?
     if Hardware::CPU.arm?
       if File.exist?("/lib/libc.musl-aarch64.so.1") || `ldd /bin/ls 2>&1`.include?("musl")
         url "#{base_url}/codebuddy-code_Linux_arm64_musl.tar.gz"
-        sha256 "53ca47b18d607319ed52cc4b91dde77de63f2e14c0e19320e3be072f337a7aaa"
+        sha256 "c629119943aa54483cb8cd5eccb6ef7cf2ce49a1105f61b5313565fd608a8725"
       else
         url "#{base_url}/codebuddy-code_Linux_arm64.tar.gz"
-        sha256 "5dee0009f57daea2ee92b5118689e932741e79087d0a15ba6164ca98e7cf44cf"
+        sha256 "5d3c38487349531e7d8a877768b8e0d6f24b3a2a41c4a6aee1d97d78aa648913"
       end
     else
       if File.exist?("/lib/libc.musl-x86_64.so.1") || `ldd /bin/ls 2>&1`.include?("musl")
         url "#{base_url}/codebuddy-code_Linux_x86_64_musl.tar.gz"
-        sha256 "8af850a7f67512183adb209753e3f288a6980eedbfae575e5f1de03099986822"
+        sha256 "68f233a32e3e87615ec55aeff98abc3c2a452ae4db31c2fa89098dfd890b8d12"
       else
         url "#{base_url}/codebuddy-code_Linux_x86_64.tar.gz"
-        sha256 "f773ff2e570d10b874fb4063813c36f635724dfd9e0541da500219ead0eb0f93"
+        sha256 "0eec5007dd131656f452270663a2a204ce5f1b4549655423336c499cc263aa88"
       end
     end
   end
