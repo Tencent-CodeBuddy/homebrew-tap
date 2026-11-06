@@ -2,34 +2,34 @@ class CodebuddyCode < Formula
   desc "AI-powered coding assistant for terminal, IDE, and GitHub"
   homepage "https://cnb.cool/codebuddy/codebuddy-code"
   license "MIT"
-  version "2.180.0"
+  version "2.181.0"
 
   base_url = "https://acc-1258344699.cos.ap-guangzhou.myqcloud.com/@tencent-ai/codebuddy-code/releases/download/#{version}"
 
   if OS.mac?
     if Hardware::CPU.arm?
       url "#{base_url}/codebuddy-code_Darwin_arm64.tar.gz"
-      sha256 "61e710cf9f4c51bc21a99f3bf9b1fb5814c74dba03f978dd99792fad66d20092"
+      sha256 "61c36e0a6a0da50e78998e61437a181e2652a97cc14b1d3da8102c638699c338"
     else
       url "#{base_url}/codebuddy-code_Darwin_x86_64.tar.gz"
-      sha256 "19a9d043c9cb89a591ef21a3c0b09362e977a867aeb8652b24c2bcc4ba9b1b95"
+      sha256 "4e9155c35e59c24ff88e4be740dafbac5042f1d8affd4b7a0341a59c5bd5f49c"
     end
   elsif OS.linux?
     if Hardware::CPU.arm?
       if File.exist?("/lib/libc.musl-aarch64.so.1") || `ldd /bin/ls 2>&1`.include?("musl")
         url "#{base_url}/codebuddy-code_Linux_arm64_musl.tar.gz"
-        sha256 "1bb00385804be23711c53e9510f8c0ef35c4271699c828d6691aff03990304de"
+        sha256 "4dcf2907fdde5c73c707e6524768e163f8b54a9d4f6ef98c12e209cb5ab1ddad"
       else
         url "#{base_url}/codebuddy-code_Linux_arm64.tar.gz"
-        sha256 "18ba4586d1b8991b9a9864fe620570d5a26f2cff37ac29d1e1322efecf83dab6"
+        sha256 "b94a793f94aa56665de1a136203c427cddd3ef5212413dca6cdeb74cc1341bc8"
       end
     else
       if File.exist?("/lib/libc.musl-x86_64.so.1") || `ldd /bin/ls 2>&1`.include?("musl")
         url "#{base_url}/codebuddy-code_Linux_x86_64_musl.tar.gz"
-        sha256 "bd00a10d006d5f4df82beffd03fdd55f68f3857b22b4956211e982bb42855042"
+        sha256 "6af66f912a09ab61739bc4f9e331d6caba867f68a5dc5cd0f0f84b0cd346b3db"
       else
         url "#{base_url}/codebuddy-code_Linux_x86_64.tar.gz"
-        sha256 "22522bf1b606f3bd48fb6e65b8baf1c1af64a06ad97ccf3f03456de6e692d1cf"
+        sha256 "d8a983f0866ea6494223cdce09f969013b714e65898d607f0206b9bd4eb2c922"
       end
     end
   end
