@@ -37,6 +37,10 @@ class CodebuddyCode < Formula
   def install
     bin.install "codebuddy"
     bin.install_symlink "codebuddy" => "cbc"
+    # The sandbox feature requires the bundled vendor directory (sandbox-cli,
+    # sandbox-center, Runtime Kit shim, genie-trash) to be installed next to
+    # the binary, i.e. at <prefix>/bin/vendor/<...>.
+    (bin/"vendor").install Dir["vendor/*"]
   end
 
   test do
