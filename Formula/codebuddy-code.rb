@@ -2,34 +2,34 @@ class CodebuddyCode < Formula
   desc "AI-powered coding assistant for terminal, IDE, and GitHub"
   homepage "https://cnb.cool/codebuddy/codebuddy-code"
   license "MIT"
-  version "2.184.0"
+  version "2.185.0"
 
   base_url = "https://acc-1258344699.cos.ap-guangzhou.myqcloud.com/@tencent-ai/codebuddy-code/releases/download/#{version}"
 
   if OS.mac?
     if Hardware::CPU.arm?
       url "#{base_url}/codebuddy-code_Darwin_arm64.tar.gz"
-      sha256 "cd5a0107fde60ef861a0b2abae5821a54d543cd79ec5c4f5e69c29b00a2bec84"
+      sha256 "91dd6ba377df9403a542a96be7fd9f675972adcbbe21a33508e1f57ef8acb699"
     else
       url "#{base_url}/codebuddy-code_Darwin_x86_64.tar.gz"
-      sha256 "3c8fd5dacd1478f9a251767c3342ffd3033b8686679e71147a0449b7dc3bc639"
+      sha256 "fb9d30d16131494c75774e8168464821bd1288ded6d9b19bdc3db532c7d1a0d3"
     end
   elsif OS.linux?
     if Hardware::CPU.arm?
       if File.exist?("/lib/libc.musl-aarch64.so.1") || `ldd /bin/ls 2>&1`.include?("musl")
         url "#{base_url}/codebuddy-code_Linux_arm64_musl.tar.gz"
-        sha256 "8e3158e898b81742e02d77adc62e77b731f954b4387f8226c0035de469864b06"
+        sha256 "3bfff2da29dcc9fdf6b49be9ba02a2b6e4ce2b37b88c486ee4a7146d9307854a"
       else
         url "#{base_url}/codebuddy-code_Linux_arm64.tar.gz"
-        sha256 "c325d8a988a61596ff32665fe299bf26053e7d212dc500dc0ffb136145273c53"
+        sha256 "c17235a24e7cf0443535d71ec747c53590f6801b0be753ca66a930e1f96600e4"
       end
     else
       if File.exist?("/lib/libc.musl-x86_64.so.1") || `ldd /bin/ls 2>&1`.include?("musl")
         url "#{base_url}/codebuddy-code_Linux_x86_64_musl.tar.gz"
-        sha256 "a1f8273874d19b7256eb883fa54c80e21dd55528fb94435db7405acd79f8684d"
+        sha256 "82d961dc33accdcbb841d15130c3e25bb9cd34c21b0a8f7e52d4cc3d1eb10810"
       else
         url "#{base_url}/codebuddy-code_Linux_x86_64.tar.gz"
-        sha256 "1d780dc0f459d30ac0cc51153d04f29ab8063ec24d5ce39b31f82bb719f45937"
+        sha256 "be562e8ce3feb9e22b52adf1c36d3bdc09f3161796817bafcd013849285eaeb3"
       end
     end
   end
