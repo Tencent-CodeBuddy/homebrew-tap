@@ -100,12 +100,21 @@ class CLASS_NAME_PLACEHOLDER < Formula
   def install
     bin.install "codebuddy"
     bin.install_symlink "codebuddy" => "cbc"
+    # macOS tarballs ship a vendor/ tree (sandbox-cli, sandbox-center,
+    # runtime kit, genie-trash) that the runtime resolves relative to the
+    # binary. Without it the sandbox cannot start and auto mode falls back
+    # to unsandboxed execution. Linux tarballs do not contain vendor/.
+    bin.install "vendor" if (buildpath/"vendor").directory?
   end
 
   test do
     assert_predicate bin/"codebuddy", :exist?
     assert_predicate bin/"codebuddy", :executable?
     assert_predicate bin/"cbc", :exist?
+    if OS.mac?
+      assert_predicate bin/"vendor/sandbox", :directory?
+      assert_predicate bin/"vendor/sandbox-center-runtime-kit", :directory?
+    end
     output = shell_output("#{bin}/codebuddy --version")
     assert_match version.to_s, output
   end
